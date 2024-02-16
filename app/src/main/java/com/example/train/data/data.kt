@@ -1,12 +1,12 @@
 package com.example.train.data
 
 data class WeatherData(
-    val current: CurrentWeather
+    val weather: List<Weather>,
+    val main: Main
 )
-data class CurrentWeather (
-    val temp: Double,
-    val weather: WeatherInfo
-)
-data class WeatherInfo (
+data class Weather (
     val description: String
+)
+data class Main (
+    val temp: Double
 )

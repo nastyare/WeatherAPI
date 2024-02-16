@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Train</string>
     <string name="checking">Check the weather</string>
+    <string name="temperature_template">Температура: %1$.1f°C</string>
 </resources>

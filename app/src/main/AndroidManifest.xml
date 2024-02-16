@@ -19,9 +19,9 @@
             android:name=".NewActivity"
             android:exported="false"
             android:label="NewActivity"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".UI.MainActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name=".UI.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
