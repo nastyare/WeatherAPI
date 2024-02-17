@@ -39,13 +39,14 @@ class MainActivity : AppCompatActivity() {
             if(locationText.text.toString().trim().equals("")) {
                 Toast.makeText(this, "Type your location!", Toast.LENGTH_LONG).show()
             } else {
-                var city = locationText.text.toString()
-                cityText.text = city
+                val city = locationText.text.toString()
+                //cityText.text = city
                 getWeatherData(city)
             }
         }
         val observeWeather = Observer<WeatherData> {newValue ->
             val tempInCelsius = newValue.main.temp - 273.15
+            cityText.text = newValue.name
             tempText.text = String.format("%.2f°C", tempInCelsius)
             descText.text = newValue.weather.firstOrNull()?.description ?: "Описание недоступно"
 

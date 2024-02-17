@@ -1,6 +1,5 @@
 package com.example.train.viewmodel
 
-import android.annotation.SuppressLint
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -26,7 +25,7 @@ class WeatherViewModel : ViewModel() {
                 val response = apiService.getWeather(cityName, "e8e57c0253712af6201e66f3d7da762e", lang)
                 _currentWeather.value = response
             } catch (e: Exception) {
-                Log.d("WeatherViewModel", "Error in getWeather: ${e.message}")
+                Log.d("WeatherViewModel", "smth wrong here: ${e.message}")
                 e.printStackTrace()
             }
         }
