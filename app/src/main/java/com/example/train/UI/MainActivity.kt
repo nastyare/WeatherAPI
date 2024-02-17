@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import com.bumptech.glide.Glide
 import com.example.train.R
 import com.example.train.data.WeatherData
 import com.example.train.viewmodel.WeatherViewModel
@@ -40,17 +41,21 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Type your location!", Toast.LENGTH_LONG).show()
             } else {
                 val city = locationText.text.toString()
-                //cityText.text = city
                 getWeatherData(city)
             }
         }
         val observeWeather = Observer<WeatherData> {newValue ->
             val tempInCelsius = newValue.main.temp - 273.15
             cityText.text = newValue.name
+            val iconCode = newValue.weather.firstOrNull()?.icon
+            if (iconCode != null) {
+                Glide.with(this@MainActivity)
+                    .load("http://openweathermap.org/img/wn/10n.png")
+                    .override(200, 200)
+                    .into(image)
+            }
             tempText.text = String.format("%.2f°C", tempInCelsius)
             descText.text = newValue.weather.firstOrNull()?.description ?: "Описание недоступно"
-
-            updateWeatherImage(tempInCelsius)
         }
 
         weatherViewModel.currentWeather.observe(this, observeWeather)
@@ -60,15 +65,6 @@ class MainActivity : AppCompatActivity() {
             cityText.text = bundle.getString("cityTextContent", "")
             tempText.text = bundle.getString("tempTextContent", "")
             descText.text = bundle.getString("descTextContent", "")
-        }
-    }
-
-    private fun updateWeatherImage(tempInCelsius: Double) {
-        val imageView = findViewById<ImageView>(R.id.imageView)
-        if (tempInCelsius > 0) {
-            imageView.setImageResource(R.drawable.sun)
-        } else {
-            imageView.setImageResource(R.drawable.snow)
         }
     }
 
