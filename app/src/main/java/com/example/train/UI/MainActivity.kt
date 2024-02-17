@@ -54,6 +54,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         weatherViewModel.currentWeather.observe(this, observeWeather)
+
+        savedInstanceState?.let { bundle ->
+            locationText.setText(bundle.getString("locTextContent", ""))
+            cityText.text = bundle.getString("cityTextContent", "")
+            tempText.text = bundle.getString("tempTextContent", "")
+            descText.text = bundle.getString("descTextContent", "")
+        }
     }
 
     private fun updateWeatherImage(tempInCelsius: Double) {
